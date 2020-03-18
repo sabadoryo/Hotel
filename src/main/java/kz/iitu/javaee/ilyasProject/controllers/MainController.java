@@ -3,13 +3,7 @@ package kz.iitu.javaee.ilyasProject.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-//Zhanbolat super proger
-//super puper
 
-//check from AskeSaske test
-//Zhanbolat super proger
-//super puper
-//asdasdasdasdasdasdasdasdasdasdass
 @Controller
 public class MainController {
 
@@ -33,15 +27,7 @@ public class MainController {
         return "profile";
     }
 
-    @GetMapping(path = "/Asdasdsae")
-    public String yerasdasdasdsadasdsadsadasdasdanar(Model model){
-        return "profile";
-    }
 
 
-    @GetMapping(path = "/novaya_functions")
-    public String asdsdasd(Model model){
-        return "profile";
-    }
 
 }
