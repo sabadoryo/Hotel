@@ -3,7 +3,7 @@ package kz.iitu.javaee.ilyasProject.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-//asdasdasdasdas
+//asdasdasdasdasdasdasdasdasdasdas
 @Controller
 public class MainController {
 
