@@ -27,6 +27,10 @@ public class MainController {
         return "profile";
     }
 
+    @GetMapping(path = "/profile")
+    public String gaASDASDASDASDASDASDASDASDASga(Model model){
+        return "profile";
+    }
 
 
 
