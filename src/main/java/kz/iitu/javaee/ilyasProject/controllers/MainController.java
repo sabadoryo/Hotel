@@ -28,7 +28,7 @@ public class MainController {
     }
 
     @GetMapping(path = "/profile")
-    public String gaASDASDASDASDASDASDASDASDASga(Model model){
+    public String gaDASga(Model model){
         return "profile";
     }
 
