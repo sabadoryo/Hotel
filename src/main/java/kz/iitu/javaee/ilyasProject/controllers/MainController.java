@@ -22,16 +22,4 @@ public class MainController {
         return "profile";
     }
 
-    @GetMapping(path = "/profile")
-    public String gaga(Model model){
-        return "profile";
-    }
-
-
-
-
-    public void kek(){
-        int count = 0;
-    }
-
 }
