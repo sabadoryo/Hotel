@@ -26,8 +26,14 @@ public class MainController {
 
     @GetMapping(path = "/")
     public String index(Model model) {
+        return "annonymous/index";
+    }
+
+    @GetMapping(path = "/admin/index")
+    public String indexAdmin(Model model) {
         return "index";
     }
+
 
     @GetMapping(path = "/login")
     public String login(Model model) {
@@ -49,6 +55,7 @@ public class MainController {
             @RequestParam(name = "user_name") String name,
             @RequestParam(name = "user_email") String email,
             @RequestParam(name = "user_password") String password) {
+
         Set<Roles> roles = new HashSet<>();
         Roles r = rolesRepository.findById(1L).orElse(null);
         roles.add(r);
