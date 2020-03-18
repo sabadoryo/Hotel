@@ -33,4 +33,9 @@ public class MainController {
         return "profile";
     }
 
+    @GetMapping(path = "/Asdasdsae")
+    public String yernar(Model model){
+        return "profile";
+    }
+
 }
