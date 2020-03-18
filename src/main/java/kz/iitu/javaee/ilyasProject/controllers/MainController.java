@@ -44,4 +44,8 @@ public class MainController {
         return "profile";
     }
 
+    public void kek(){
+        int count = 0;
+    }
+
 }
