@@ -28,6 +28,11 @@ public class MainController {
         return "profile";
     }
 
+    @GetMapping(path = "/profile")
+    public String gaga(Model model){
+        return "profile";
+    }
+
     @GetMapping(path = "/Asdasdsae")
     public String yernar(Model model){
         return "profile";
