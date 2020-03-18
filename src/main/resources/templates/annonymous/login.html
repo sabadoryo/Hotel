@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorator="main/main.html">
+    <div layout:fragment="content">
+        <div class="row">
+            <div class="col-sm-6 offset-3">
+                <form class="form" th:action = "@{'/auth'}" method="post">
+                    <div class="form-group">
+                        <label>
+                            Email:
+                        </label>
+                        <input type="email" class="form-control" name="user_email">
+                    </div>
+                    <div class="form-group">
+                        <label th:text = "#{label.password}"></label>
+                        <input type="password" class="form-control" name="user_password">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success" th:text = "#{label.login}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</html>
