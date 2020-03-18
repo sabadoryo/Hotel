@@ -34,7 +34,7 @@ public class MainController {
     }
 
     @GetMapping(path = "/Asdasdsae")
-    public String yernar(Model model){
+    public String yerasdasdasdsadasdsadsadasdasdanar(Model model){
         return "profile";
     }
 
