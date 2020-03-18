@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 //Zhanbolat super proger
 //super puper
+//asdasdasdasdasdasdasdasdasdasdass
 @Controller
 public class MainController {
 
