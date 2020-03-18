@@ -3,6 +3,9 @@ package kz.iitu.javaee.ilyasProject.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+//Zhanbolat super proger
+//super puper
+
 //check from AskeSaske test
 @Controller
 public class MainController {
