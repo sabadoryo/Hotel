@@ -38,4 +38,10 @@ public class MainController {
         return "profile";
     }
 
+
+    @GetMapping(path = "/novaya_functions")
+    public String asdsdasd(Model model){
+        return "profile";
+    }
+
 }
