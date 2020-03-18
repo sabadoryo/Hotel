@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 //super puper
 
 //check from AskeSaske test
+//Zhanbolat super proger
+//super puper
+//asdasdasdasdasdasdasdasdasdasdass
 @Controller
 public class MainController {
 
