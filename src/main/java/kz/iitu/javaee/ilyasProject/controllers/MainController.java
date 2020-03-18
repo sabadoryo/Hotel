@@ -34,4 +34,8 @@ public class MainController {
 
 
 
+    public void kek(){
+        int count = 0;
+    }
+
 }
