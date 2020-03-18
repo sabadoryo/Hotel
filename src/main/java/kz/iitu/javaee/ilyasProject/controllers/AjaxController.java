@@ -22,9 +22,6 @@ public class AjaxController {
     @Autowired
     private UserRepository userRepository;
 
-    // @ResponseBody, not necessary, since class is annotated with @RestController
-    // @RequestBody - Convert the json data into object (SearchCriteria) mapped by field name.
-    // @JsonView(Views.Public.class) - Optional, limited the json data display to client.
     @JsonView(Views.Public.class)
     @CrossOrigin(origins = "http://localhost:8004")
     @RequestMapping(value = "/search/api/getSearchResult")
