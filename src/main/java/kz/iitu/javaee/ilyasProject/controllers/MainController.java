@@ -1,5 +1,6 @@
 package kz.iitu.javaee.ilyasProject.controllers;
 
+import kz.iitu.javaee.ilyasProject.entities.Bookings;
 import kz.iitu.javaee.ilyasProject.entities.Roles;
 import kz.iitu.javaee.ilyasProject.entities.Rooms;
 import kz.iitu.javaee.ilyasProject.entities.Users;
@@ -94,7 +95,38 @@ public class MainController {
 
         long diff = date2.getTime() - date1.getTime();
         int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
-        System.out.println(diffDays);
+
+        List<Rooms> all_rooms = roomsRepository.findAll();
+        List<Rooms> empty_rooms = new ArrayList<>();
+
+        int count = 0;
+
+        for (Rooms r: all_rooms) {
+            if (r.getCapacity() == guests && r.getSize() == room) {
+                if (r.getBookings().size() == 0) {
+                    r.setIsReserved(false);
+                    empty_rooms.add(r);
+                } else {
+
+                    for (Bookings b : r.getBookings()) {
+                        if (b.getStartDate().after(date2) || b.getEndDate().before(date1))
+                            if (!(b.getEndDate().after(date1) && b.getEndDate().before(date2)))
+                                if (!(b.getStartDate().after(date1) && b.getStartDate().before(date1))) {
+                                    count++;
+                                    if (r.getBookings().size() == count) {
+                                        r.setIsReserved(false);
+                                        empty_rooms.add(r);
+                                    } else
+                                        r.setIsReserved(true);
+                                }
+                    }
+                }
+            }
+        }
+
+        System.out.println(empty_rooms);
+        System.out.println(empty_rooms.size());
+
 
         return "annonymous/index";
     }
