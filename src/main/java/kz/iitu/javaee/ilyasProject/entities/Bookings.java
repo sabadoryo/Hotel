@@ -15,7 +15,7 @@ import java.util.Date;
 public class Bookings extends BaseEntity {
 
     @Column(name = "title")
-    private int title;
+    private String title;
 
     @Column(name = "startDate")
     private Date startDate;
