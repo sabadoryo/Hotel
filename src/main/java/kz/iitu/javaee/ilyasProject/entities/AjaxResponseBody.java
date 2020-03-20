@@ -15,20 +15,6 @@ public class AjaxResponseBody {
     @JsonView(Views.Public.class)
     String passwordError;
 
-    public String getFullNameError() {
-        return fullNameError;
-    }
-
-    public void setFullNameError(String fullNameError) {
-        this.fullNameError = fullNameError;
-    }
-
-    @JsonView(Views.Public.class)
-    String fullNameError;
-
-    public String getPasswordError() {
-        return passwordError;
-    }
 
     public void setPasswordError(String passwordError) {
         this.passwordError = passwordError;
@@ -36,10 +22,6 @@ public class AjaxResponseBody {
 
     @JsonView(Views.Public.class)
     List<Users> result;
-
-    public String getMsg() {
-        return msg;
-    }
 
     public void setMsg(String msg) {
         this.msg = msg;
@@ -51,10 +33,6 @@ public class AjaxResponseBody {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public List<Users> getResult() {
-        return result;
     }
 
     public void setResult(List<Users> result) {

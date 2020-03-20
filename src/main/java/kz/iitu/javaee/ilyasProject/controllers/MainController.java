@@ -1,8 +1,10 @@
 package kz.iitu.javaee.ilyasProject.controllers;
 
 import kz.iitu.javaee.ilyasProject.entities.Roles;
+import kz.iitu.javaee.ilyasProject.entities.Rooms;
 import kz.iitu.javaee.ilyasProject.entities.Users;
 import kz.iitu.javaee.ilyasProject.repositories.RolesRepository;
+import kz.iitu.javaee.ilyasProject.repositories.RoomsRepository;
 import kz.iitu.javaee.ilyasProject.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -24,8 +27,13 @@ public class MainController {
     @Autowired
     private RolesRepository rolesRepository;
 
+    @Autowired
+    private RoomsRepository roomsRepository;
+
     @GetMapping(path = "/")
     public String index(Model model) {
+        List<Rooms> allRooms = roomsRepository.findAll();
+
         return "annonymous/index";
     }
 
