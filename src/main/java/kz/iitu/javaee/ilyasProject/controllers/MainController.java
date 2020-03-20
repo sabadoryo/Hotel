@@ -1,12 +1,12 @@
 package kz.iitu.javaee.ilyasProject.controllers;
 
-import kz.iitu.javaee.ilyasProject.entities.Bookings;
 import kz.iitu.javaee.ilyasProject.entities.Roles;
 import kz.iitu.javaee.ilyasProject.entities.Rooms;
 import kz.iitu.javaee.ilyasProject.entities.Users;
 import kz.iitu.javaee.ilyasProject.repositories.RolesRepository;
 import kz.iitu.javaee.ilyasProject.repositories.RoomsRepository;
 import kz.iitu.javaee.ilyasProject.repositories.UserRepository;
+import kz.iitu.javaee.ilyasProject.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -33,6 +34,11 @@ public class MainController {
 
     @Autowired
     private RoomsRepository roomsRepository;
+
+    @Autowired
+    private RoomService roomService;
+
+
 
     @GetMapping(path = "/")
     public String index(Model model) {
@@ -82,51 +88,21 @@ public class MainController {
     }
 
     @PostMapping(value = "/search")
-    public String search(
+    public String search(ModelMap model,
             @RequestParam(name = "date_in") String date_in,
             @RequestParam(name = "date_out") String date_out,
-            @RequestParam(name = "guests") int guests,
-            @RequestParam(name = "room") int room
+            @RequestParam(name = "guests") int room_capacity,
+            @RequestParam(name = "room") int room_size
             ) throws ParseException {
         DateFormat format = new SimpleDateFormat("dd MMMM, yyyy", Locale.ENGLISH);
 
         Date date1 = format.parse(date_in);
         Date date2 = format.parse(date_out);
 
-        long diff = date2.getTime() - date1.getTime();
-        int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
-
-        List<Rooms> all_rooms = roomsRepository.findAll();
-        List<Rooms> empty_rooms = new ArrayList<>();
-
-        int count = 0;
-
-        for (Rooms r: all_rooms) {
-            if (r.getCapacity() == guests && r.getSize() == room) {
-                if (r.getBookings().size() == 0) {
-                    r.setIsReserved(false);
-                    empty_rooms.add(r);
-                } else {
-
-                    for (Bookings b : r.getBookings()) {
-                        if (b.getStartDate().after(date2) || b.getEndDate().before(date1))
-                            if (!(b.getEndDate().after(date1) && b.getEndDate().before(date2)))
-                                if (!(b.getStartDate().after(date1) && b.getStartDate().before(date1))) {
-                                    count++;
-                                    if (r.getBookings().size() == count) {
-                                        r.setIsReserved(false);
-                                        empty_rooms.add(r);
-                                    } else
-                                        r.setIsReserved(true);
-                                }
-                    }
-                }
-            }
-        }
+        List<Rooms> empty_rooms;
+        empty_rooms = roomService.getAvailableRooms(date1,date2,room_size,room_capacity);
 
         System.out.println(empty_rooms);
-        System.out.println(empty_rooms.size());
-
 
         return "annonymous/index";
     }
