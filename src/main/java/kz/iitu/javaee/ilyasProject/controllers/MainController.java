@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import java.util.Date;
 
 @Controller
 public class MainController {
@@ -47,6 +50,11 @@ public class MainController {
         return "annonymous/login";
     }
 
+    @GetMapping(path = "/rooms")
+    public String rooms() {
+        return "annonymous/rooms";
+    }
+
     @GetMapping(path = "/profile")
     public String profile(Model model) {
         return "profile";
@@ -71,6 +79,27 @@ public class MainController {
         userRepository.save(user);
         return "annonymous/login";
     }
+
+    @PostMapping(value = "/search")
+    public String search(
+            @RequestParam(name = "date_in") String date_in,
+            @RequestParam(name = "date_out") String date_out,
+            @RequestParam(name = "guests") int guests,
+            @RequestParam(name = "room") int room
+            ) throws ParseException {
+        DateFormat format = new SimpleDateFormat("dd MMMM, yyyy", Locale.ENGLISH);
+
+        Date date1 = format.parse(date_in);
+        Date date2 = format.parse(date_out);
+
+        long diff = date2.getTime() - date1.getTime();
+        int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+        System.out.println(diffDays);
+
+        return "annonymous/index";
+    }
+
+
 
 
 
