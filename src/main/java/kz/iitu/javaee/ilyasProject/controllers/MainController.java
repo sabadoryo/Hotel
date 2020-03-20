@@ -32,7 +32,6 @@ public class MainController {
 
     @GetMapping(path = "/")
     public String index(Model model) {
-        List<Rooms> allRooms = roomsRepository.findAll();
 
         return "annonymous/index";
     }
