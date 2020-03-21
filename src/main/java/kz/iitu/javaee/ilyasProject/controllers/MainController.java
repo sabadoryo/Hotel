@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -43,6 +44,7 @@ public class MainController {
     @GetMapping(path = "/")
     public String index(Model model) {
 
+        model.addAttribute("classActiveSettingsIndexPage","active");
         return "annonymous/index";
     }
 
@@ -58,7 +60,8 @@ public class MainController {
     }
 
     @GetMapping(path = "/rooms")
-    public String rooms() {
+    public String rooms(Model model) {
+        model.addAttribute("classActiveSettingsRoomsPage","active");
         return "annonymous/rooms";
     }
 
@@ -87,12 +90,12 @@ public class MainController {
         return "annonymous/login";
     }
 
-    @PostMapping(value = "/search")
-    public String search(ModelMap model,
-            @RequestParam(name = "date_in") String date_in,
-            @RequestParam(name = "date_out") String date_out,
-            @RequestParam(name = "guests") int room_capacity,
-            @RequestParam(name = "room") int room_size
+    @PostMapping(value = "/searchRoomsMain")
+    public String searchRoomsMain(RedirectAttributes redirectAttributes,
+                                  @RequestParam(name = "date_in") String date_in,
+                                  @RequestParam(name = "date_out") String date_out,
+                                  @RequestParam(name = "guests") int room_capacity,
+                                  @RequestParam(name = "room") int room_size
             ) throws ParseException {
         DateFormat format = new SimpleDateFormat("dd MMMM, yyyy", Locale.ENGLISH);
 
@@ -102,9 +105,9 @@ public class MainController {
         List<Rooms> empty_rooms;
         empty_rooms = roomService.getAvailableRooms(date1,date2,room_size,room_capacity);
 
-        System.out.println(empty_rooms);
+        redirectAttributes.addFlashAttribute("empty_rooms", empty_rooms);
 
-        return "annonymous/index";
+        return "redirect:/rooms";
     }
 
 

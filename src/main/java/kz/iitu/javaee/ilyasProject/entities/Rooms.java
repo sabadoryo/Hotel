@@ -36,6 +36,15 @@ public class Rooms extends BaseEntity {
     @Column(name = "picture")
     private String picturePath;
 
+    @Column(name = "bedInfo")
+    private String bedInfo;
+
+    @Column(name = "services")
+    private String services;
+
+    @Column(name = "cost")
+    private Double cost;
+
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Bookings> bookings;
 
