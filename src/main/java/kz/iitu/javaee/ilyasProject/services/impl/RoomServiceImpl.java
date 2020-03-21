@@ -7,9 +7,13 @@ import kz.iitu.javaee.ilyasProject.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -18,7 +22,13 @@ public class RoomServiceImpl implements RoomService {
     RoomsRepository roomsRepository;
 
     @Override
-    public List<Rooms> getAvailableRooms(Date date_in, Date date_out, int room_size, int room_capacity) {
+    public List<Rooms> getAvailableRooms(String date_In, String date_Out, int room_size, int room_capacity) throws ParseException {
+        DateFormat format = new SimpleDateFormat("dd MMMM, yyyy", Locale.ENGLISH);
+
+        Date date_in = format.parse(date_In);
+        Date date_out = format.parse(date_Out);
+
+
         List<Rooms> all_rooms = roomsRepository.findAll();
         List<Rooms> empty_rooms = new ArrayList<>();
 
