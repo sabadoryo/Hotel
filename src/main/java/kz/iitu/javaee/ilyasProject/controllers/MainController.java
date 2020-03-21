@@ -61,6 +61,9 @@ public class MainController {
 
     @GetMapping(path = "/rooms")
     public String rooms(Model model) {
+        List<Rooms> all_rooms = roomsRepository.findAll();
+        model.addAttribute("is_available_rooms", "Rooms");
+        model.addAttribute("empty_rooms",all_rooms);
         model.addAttribute("classActiveSettingsRoomsPage","active");
         return "annonymous/rooms";
     }
@@ -90,24 +93,28 @@ public class MainController {
         return "annonymous/login";
     }
 
-    @PostMapping(value = "/searchRoomsMain")
-    public String searchRoomsMain(RedirectAttributes redirectAttributes,
+    @PostMapping(value = "/available_Rooms_By_Criteria_Main")
+    public String searchRoomsMain(Model model,
                                   @RequestParam(name = "date_in") String date_in,
                                   @RequestParam(name = "date_out") String date_out,
                                   @RequestParam(name = "guests") int room_capacity,
                                   @RequestParam(name = "room") int room_size
             ) throws ParseException {
-        DateFormat format = new SimpleDateFormat("dd MMMM, yyyy", Locale.ENGLISH);
 
-        Date date1 = format.parse(date_in);
-        Date date2 = format.parse(date_out);
+          List<Rooms> empty_rooms = roomService.getAvailableRooms(date_in,date_out,room_size,room_capacity);
 
-        List<Rooms> empty_rooms;
-        empty_rooms = roomService.getAvailableRooms(date1,date2,room_size,room_capacity);
+          //Message if there is available rooms
+          String is_available_rooms = "There is no available rooms";
 
-        redirectAttributes.addFlashAttribute("empty_rooms", empty_rooms);
+          if(empty_rooms.size() > 0)
+              is_available_rooms = "Available rooms:";
 
-        return "redirect:/rooms";
+          model.addAttribute("classActiveSettingsRoomsPage","active");
+          model.addAttribute("empty_rooms",empty_rooms);
+          model.addAttribute("is_available_rooms",is_available_rooms);
+
+          return "annonymous/rooms";
+
     }
 
 
