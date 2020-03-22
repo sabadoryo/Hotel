@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2 th:text = "${is_available_rooms}"></h2>
+                        <h5 th:text = "${is_available_rooms}"></h5><a href="/"><span th:text = "${url_home}"></span></a>
 <!--                        <div class="bt-option">-->
 <!--                            <a href="./home.html">Home</a>-->
 <!--                            <span>Rooms</span>-->
@@ -52,7 +52,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                            <a th:href = "@{'/details/room/'+${room.id}}" class="primary-btn">More Details</a>
                         </div>
                     </div>
                 </div>

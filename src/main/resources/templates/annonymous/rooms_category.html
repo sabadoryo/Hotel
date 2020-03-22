@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorator="main/main_hotel.html">
+<div layout:fragment="content">
+
+    <!-- Breadcrumb Section Begin -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h3>Our rooms:</h3>
+                                                <div class="bt-option">
+                                                    <a href="/">Home</a>
+                                                    <span>Rooms</span>
+                                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Rooms Section Begin -->
+    <section class="rooms-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6" th:each = "category : ${categories}">
+                    <div class="room-item">
+                        <img th:src="${category.picturePath}" alt="">
+                        <div class="ri-text">
+                            <h4 th:text = "${category.title}"></h4>
+                            <a th:href = "@{'/details/category/'+${category.id}}" class="primary-btn">More Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Rooms Section End -->
+</div>
+</html>
+<!-- Footer Section Begin -->
