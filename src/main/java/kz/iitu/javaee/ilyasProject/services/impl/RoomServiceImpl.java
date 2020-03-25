@@ -2,9 +2,13 @@ package kz.iitu.javaee.ilyasProject.services.impl;
 
 import kz.iitu.javaee.ilyasProject.entities.Bookings;
 import kz.iitu.javaee.ilyasProject.entities.Category;
+import kz.iitu.javaee.ilyasProject.entities.Customers;
 import kz.iitu.javaee.ilyasProject.entities.Rooms;
+import kz.iitu.javaee.ilyasProject.repositories.BookingsRepository;
 import kz.iitu.javaee.ilyasProject.repositories.CategoriesRepository;
+import kz.iitu.javaee.ilyasProject.repositories.CustomersRepository;
 import kz.iitu.javaee.ilyasProject.repositories.RoomsRepository;
+import kz.iitu.javaee.ilyasProject.services.EmailService;
 import kz.iitu.javaee.ilyasProject.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +26,15 @@ public class RoomServiceImpl implements RoomService {
 
     @Autowired
     CategoriesRepository categoriesRepository;
+
+    @Autowired
+    BookingsRepository bookingsRepository;
+
+    @Autowired
+    CustomersRepository customersRepository;
+
+    @Autowired
+    EmailService emailService;
 
     @Override
     public List<Rooms> getAvailableRooms(String date_In, String date_Out, int room_size, int room_capacity) throws ParseException {
@@ -99,6 +112,36 @@ public class RoomServiceImpl implements RoomService {
             }
         }
         return empty_rooms;
+    }
+
+    @Override
+    public void addBookingToRoom(Long room_id, String date_in, String date_out,String email, String full_name, Long iin) throws ParseException {
+
+        DateFormat format = new SimpleDateFormat("dd MMMM, yyyy", Locale.ENGLISH);
+        Date date_in1 = format.parse(date_in);
+        Date date_out1 = format.parse(date_out);
+
+
+        Bookings booking = new Bookings("This booking for room with id: " + room_id,date_in1,date_out1,"customer email:" + email + "fullname:"+ full_name);
+        booking.setCreatedAt(new Date());
+        bookingsRepository.save(booking);
+
+        Customers customer = new Customers(email,full_name,iin);
+        customer.setCreatedAt(new Date());
+        customersRepository.save(customer);
+
+        Rooms room = roomsRepository.findById(room_id).orElse(null);
+        room.getBookings().add(booking);
+        room.setUpdatedAt(new Date());
+        roomsRepository.save(room);
+
+        emailService.sendSimpleMessage(email,"Your booking was created.",
+                "Thank you for choosing our hotel\n " +
+                        "Your booking details:" +
+                        "\nStart date: "+date_in+"" +
+                        "\nEnd date: " + date_out+"" +
+                        "\nRoom number is: "+room.getNumber() +
+                        "\nRoom description:" +room.getDescription() +"/"+room.getSize()+" sized" + "," + room.getBedInfo() +",\nServices:" +room.getServices());
     }
 }
 
