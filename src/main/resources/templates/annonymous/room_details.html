@@ -14,7 +14,7 @@
                     <div class="breadcrumb-text">
                         <div class="bt-option">
                             <a href="/">Home</a>
-                            <a href="rooms">Rooms</a>
+                                <a href="rooms">Rooms</a>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,6 @@
                                         <i class="icon_star"></i>
                                         <i class="icon_star-half_alt"></i>
                                     </div>
-                                    <a href="#">Booking Now</a>
                                 </div>
                             </div>
                             <h2 th:text = "${room.cost} + '$/pernight'"></h2>
@@ -150,36 +149,31 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="room-booking">
-                        <h3>Your Reservation</h3>
-                        <form action="/available_Rooms_By_Criteria_Category" method="post">
+                        <h3>Your Reservation Date Is</h3>
+                        <form action="/addBooking" method="post">
                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input" id="date-in" name="date_in">
+                                <input type="text" class="date-input" id="date-in" name="date_in" th:value="${date_in}">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
                                 <label for="date-out">Check Out:</label>
-                                <input type="text" class="date-input" id="date-out" name="date_out">
+                                <input type="text" class="date-input" id="date-out" name="date_out" th:value="${date_out}">
                                 <i class="icon_calendar"></i>
                             </div>
-                            <div class="select-option">
-                                <label for="guest">Guests:</label>
-                                <select id="guest" name="guests">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                </select>
+                            <div class="check-date">
+                                <input type="text"  name="customer_email" placeholder="Enter your email">
                             </div>
-                            <div class="select-option">
-                                <label for="room">Room:</label>
-                                <select id="room" name="room">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                </select>
+
+                            <div class="check-date">
+                                <input type="text"  name="customer_fullName" placeholder="Enter your full name">
                             </div>
-                            <input type="hidden">
-                            <button type="submit">Check Availability</button>
+
+                            <div class="check-date">
+                                <input type="text"  name="customer_iin" placeholder="Enter your IIN">
+                            </div>
+                            <input type="hidden" name="room_id" th:value="${room.id}">
+                            <button type="submit">Book now</button>
                         </form>
                     </div>
                 </div>
