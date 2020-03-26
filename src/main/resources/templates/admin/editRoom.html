@@ -1,0 +1,76 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Rooms</title>
+</head>
+<body>
+<div class="row">
+    <div class="col-sm-8">
+        <form action="/updateRoom" method="post">
+            <input type="hidden" name="room_id" th:value="${room_edit.id}">
+            <div class="form-group">
+                <label>
+                    Type of the Room:
+                </label>
+                <select name="type_of_the_room" th:value="${room_edit.description}">
+                    <option>Exclusive Golden Room</option>
+                    <option>Exclusive Silver Room</option>
+                    <option>Exclusive Bronze Room</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>
+                    Capacity:
+                </label>
+                <input type="number" name="capacity" class="form-control" th:value="${room_edit.capacity}">
+            </div>
+            <div class="form-group">
+                <label>
+                    Size:
+                </label>
+                <input type="number" name="size" class="form-control" th:value="${room_edit.size}">
+            </div>
+            <div class="form-group">
+                <label>
+                    Number:
+                </label>
+                <input type="number" name="number" class="form-control" th:value="${room_edit.number}">
+            </div>
+            <div class="form-group">
+                <label>
+                    Bed info:
+                </label>
+                <input type="text" name="bed_info" class="form-control" th:value="${room_edit.bedInfo}">
+            </div>
+            <div class="form-group">
+                <label>
+                    Sevices:
+                </label>
+                <input type="text" name="services" class="form-control" th:value="${room_edit.services}">
+            </div>
+            <div class="form-group">
+                <label>
+                    Cost:
+                </label>
+                <input type="number" name="cost" class="form-control" th:value="${room_edit.cost}">
+            </div>
+            <div class="form-group">
+                <label>
+                    Capacity:
+                </label>
+                <input type="number" name="capacity" class="form-control" th:value="${room_edit.capacity}">
+            </div>
+            <div class="form-group">
+                Image:
+                <input type="file" name="image">
+            </div>
+            <button class="btn btn-success">UPDATE</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

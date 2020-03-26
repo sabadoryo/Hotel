@@ -1,0 +1,71 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Rooms</title>
+</head>
+<body>
+<div class="row">
+    <div class="col-sm-12">
+        <table cellpadding="20" class="table table-stripped">
+            <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Number
+                </th>
+                <th>
+                    Size
+                </th>
+                <th>
+                    Capacity
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Is Empty
+                </th>
+                <th>
+                    Is Reserved
+                </th>
+                <th>
+                    Services
+                </th>
+                <th>
+                    Cost
+                </th>
+                <th>
+                    Details
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each = "rooms : ${list_of_rooms}">
+                <td th:text = "${rooms.id}"></td>
+                <td th:text = "${rooms.number}"></td>
+                <td th:text = "${rooms.size}"></td>
+                <td th:text = "${rooms.capacity}"></td>
+                <td th:text = "${rooms.description}"></td>
+                <td th:text = "${rooms.isEmpty}"></td>
+                <td th:text = "${rooms.isReserved}"></td>
+                <td th:text = "${rooms.bedInfo}"></td>
+                <td th:text = "${rooms.services}"></td>
+                <td th:text = "${rooms.cost}"></td>
+                <td>
+                    <a th:href = "@{'/editRoom/'+${rooms.id}}">EDIT</a>
+                </td>
+                <td>
+                    <a th:href = "@{'/deleteRoom/'+${rooms.id}}">DELETE</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

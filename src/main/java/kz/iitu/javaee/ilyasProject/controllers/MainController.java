@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import javax.mail.MessagingException;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -65,9 +65,9 @@ public class MainController {
     }
 
 
-    @GetMapping(path = "/login")
+    @GetMapping(path = "/admin")
     public String login(Model model) {
-        return "annonymous/login";
+        return "admin/login";
     }
 
     @GetMapping(path = "/rooms")
@@ -80,7 +80,7 @@ public class MainController {
 
     @GetMapping(path = "/profile")
     public String profile(Model model) {
-        return "profile";
+        return "admin/profile";
     }
 
     @GetMapping(path = "/registration")
@@ -101,6 +101,82 @@ public class MainController {
 
         userRepository.save(user);
         return "annonymous/login";
+    }
+
+    @GetMapping(value = "/add_room_page")
+    public String addRoomPage(){
+        return "admin/add_room_page";
+    }
+
+    @PostMapping(value = "/add_room")
+    public String addRoom(@RequestParam(name = "number") int number,
+                          @RequestParam(name = "size") int size,
+                          @RequestParam(name = "capacity") int capacity,
+                          @RequestParam(name = "type_of_the_room") String type_of_the_room,
+                          @RequestParam(name = "image") String image,
+                          @RequestParam(name = "bed_info") String bed_info,
+                          @RequestParam(name = "services") String services,
+                          @RequestParam(name = "cost") Double cost
+                          ){
+        Rooms room = new Rooms(number, size, capacity, type_of_the_room,
+                false, false, "img/room/" + image, bed_info, services, cost, null);
+        roomsRepository.save(room);
+
+        return "admin/profile";
+    }
+
+    @GetMapping(path = "/list_of_rooms")
+    public String list_of_rooms(Model model){
+
+        List<Rooms> rooms = roomsRepository.findAll();
+        model.addAttribute("list_of_rooms", rooms);
+
+        return "admin/list_of_rooms";
+    }
+
+    @GetMapping(path = "/deleteRoom/{id}")
+    public String deleteRoom(@PathVariable(name = "id") Long id){
+        List<Rooms> items = roomsRepository.findAll();
+        for(Rooms i: items){
+            if(i.getId().equals(id)){
+                roomsRepository.deleteById(i.getId());
+            }
+        }
+        return "redirect:/list_of_rooms";
+    }
+
+    @GetMapping(path = "/editRoom/{id}")
+    public String editRoom(Model model, @PathVariable(name = "id") Long id){
+        Rooms room_edit = roomsRepository.findById(id).orElse(null);
+        model.addAttribute("room_edit", room_edit);
+        return "admin/editRoom";
+    }
+
+    @PostMapping(value = "/updateRoom")
+    public String updateComment(
+            @RequestParam(name = "room_id") Long id,
+            @RequestParam(name = "type_of_the_room") String description,
+            @RequestParam(name = "capacity") int capacity,
+            @RequestParam(name = "size") int size,
+            @RequestParam(name = "number") int number,
+            @RequestParam(name = "bed_info") String bed_info,
+            @RequestParam(name = "services") String services,
+            @RequestParam(name = "cost") Double cost,
+            @RequestParam(name = "image") String image){
+
+        Rooms rooms = roomsRepository.findById(id).orElse(null);
+        rooms.setDescription(description);
+        rooms.setCapacity(capacity);
+        rooms.setServices(services);
+        rooms.setSize(size);
+        rooms.setNumber(number);
+        rooms.setBedInfo(bed_info);
+        rooms.setCost(cost);
+        rooms.setPicturePath("img/room/" + image);
+
+        roomsRepository.save(rooms);
+
+        return "redirect:/list_of_rooms";
     }
 
     @PostMapping(value = "/available_Rooms_By_Criteria_Main")
@@ -193,6 +269,8 @@ public class MainController {
         roomService.addBookingToRoom(id,date_in,date_out,email,full_name,iin);
         return "redirect:/";
     }
+
+
 
 
 }
