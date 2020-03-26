@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<form action="/add_room" method="post">
+    <div class="form-group">
+        Type of the Room:
+        <select name="type_of_the_room">
+            <option>Exclusive Golden Room</option>
+            <option>Exclusive Silver Room</option>
+            <option>Exclusive Bronze Room</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        Capacity:
+        <input type="number" name="capacity">
+    </div>
+
+    <div class="form-group">
+        Size:
+        <input type="number" name="size">
+    </div>
+
+    <div class="form-group">
+        Number:
+        <input type="number" name="number">
+    </div>
+
+    <div class="form-group">
+        Bed info:
+        <input type="text" name="bed_info">
+    </div>
+
+    <div class="form-group">
+        Services:
+        <input type="text" name="services">
+    </div>
+
+    <div class="form-group">
+        Cost:
+        <input type="number" name="cost">
+    </div>
+
+    <div class="form-group">
+        Image:
+        <input type="file" name="image">
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="width:150px;height:40px">Edit</button>
+</form>
+</body>
+</html>
