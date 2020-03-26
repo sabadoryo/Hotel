@@ -43,7 +43,7 @@ public class EmailServiceImpl implements EmailService {
         helper.setText(text);
 
         FileSystemResource file
-                = new FileSystemResource(new File(pathToAttachment));
+                = new FileSystemResource(new File("C:\\Users\\HP\\Desktop\\myPhoto.jpg"));
         helper.addAttachment("Invoice", file);
 
         emailSender.send(message);

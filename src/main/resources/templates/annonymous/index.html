@@ -114,11 +114,15 @@
                         <a href="#" class="bk-btn">Booking Now</a>
                         <div class="language-option">
                             <img src="img/flag.jpg" alt="">
-                            <span>EN <i class="fa fa-angle-down"></i></span>
+                            <span th:text="#{label.language}"> <i class="fa fa-angle-down"></i></span>
                             <div class="flag-dropdown">
                                 <ul>
-                                    <li><a href="#">Zi</a></li>
-                                    <li><a href="#">Fr</a></li>
+                                    <li>
+                                        <a class="nav-link" th:href="@{'?lang=en'}">ENG</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" th:href="@{'?lang=ru'}">РУС</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -141,10 +145,10 @@
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
-                                <li class="active"><a href="/">Home</a></li>
-                                <li><a href="/rooms">Rooms</a></li>
-                                <li><a href="./about-us.html">About Us</a></li>
-                                <li><a href="./pages.html">Pages</a>
+                                <li class="active"><a href="/" th:text = "#{label.bar.home}"></a></li>
+                                <li><a href="/rooms" th:text = "#{label.bar.rooms}"></a></li>
+                                <li><a href="./about-us.html" th:text = "#{label.bar.aboutUs}"></a></li>
+                                <li><a href="./pages.html" th:text = "#{label.bar.pages}"></a>
                                     <ul class="dropdown">
                                         <li><a href="./room-details.html">Room Details</a></li>
                                         <li><a href="./blog-details.html">Blog Details</a></li>
@@ -152,8 +156,8 @@
                                         <li><a href="#">Premium Room</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="./blog.html">News</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
+                                <li><a href="./blog.html" th:text = "#{label.bar.news}">News</a></li>
+                                <li><a href="./contact.html" th:text = "#{label.bar.contact}">Contact</a></li>
                             </ul>
                         </nav>
                         <div class="nav-right search-switch">
@@ -181,20 +185,20 @@
             </div>
             <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                 <div class="booking-form">
-                    <h3>Booking Your Hotel</h3>
+                    <h3 th:text="#{label.main_form_title}"></h3>
                     <form action="/available_Rooms_By_Criteria_Main" method="post">
                         <div class="check-date">
-                            <label for="date-in">Check In:</label>
+                            <label for="date-in" th:text="#{label.main_form_checkin}"></label>
                             <input type="text" class="date-input" id="date-in" name="date_in">
                             <i class="icon_calendar"></i>
                         </div>
                         <div class="check-date">
-                            <label for="date-out">Check Out:</label>
+                            <label for="date-out" th:text="#{label.main_form_checkout}"></label>
                             <input type="text" class="date-input" id="date-out" name="date_out">
                             <i class="icon_calendar"></i>
                         </div>
                         <div class="select-option">
-                            <label for="guest">Guests:</label>
+                            <label for="guest" th:text="#{label.main_form_capacity}"></label>
                             <select id="guest" name="guests">
                                 <option>1</option>
                                 <option>2</option>
@@ -202,14 +206,14 @@
                             </select>
                         </div>
                         <div class="select-option">
-                            <label for="room">Room:</label>
+                            <label for="room"th:text="#{label.main_form_size}"></label>
                             <select id="room" name="room">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
                             </select>
                         </div>
-                        <button type="submit">Check Availability</button>
+                        <button type="submit"th:text="#{label.main_form_button}"></button>
                     </form>
                 </div>
             </div>

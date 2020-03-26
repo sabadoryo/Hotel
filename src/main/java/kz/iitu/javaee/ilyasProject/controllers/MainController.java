@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.mail.MessagingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,7 +53,7 @@ public class MainController {
 
 
     @GetMapping(path = "/")
-    public String index(Model model) {
+    public String index(Model model) throws MessagingException {
 
         model.addAttribute("classActiveSettingsIndexPage", "active");
         return "annonymous/index";

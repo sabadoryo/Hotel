@@ -112,11 +112,15 @@
                         <a href="#" class="bk-btn">Booking Now</a>
                         <div class="language-option">
                             <img src="img/flag.jpg" alt="">
-                            <span>EN <i class="fa fa-angle-down"></i></span>
+                            <span th:text="#{label.language}"><i class="fa fa-angle-down"></i></span>
                             <div class="flag-dropdown">
                                 <ul>
-                                    <li><a href="#">Zi</a></li>
-                                    <li><a href="#">Fr</a></li>
+                                    <li>
+                                        <a class="nav-link" th:href="@{'?lang=en'}">ENG</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" th:href="@{'?lang=ru'}">РУС</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -139,10 +143,10 @@
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
-                                <li th:class="${classActiveSettingsIndexPage}"><a href="/">Home</a></li>
-                                <li th:class="${classActiveSettingsRoomsPage}"><a href="/rooms">Rooms</a></li>
-                                <li><a href="../../../../../../../OneDrive/Рабочий%20стол/sona/about-us.html">About Us</a></li>
-                                <li><a href="./pages.html">Pages</a>
+                                <li th:class="${classActiveSettingsIndexPage}"><a href="/" th:text = "#{label.bar.home}"></a></li>
+                                <li th:class="${classActiveSettingsRoomsPage}"><a href="/rooms" th:text = "#{label.bar.rooms}"></a></li>
+                                <li><a href="../../../../../../../OneDrive/Рабочий%20стол/sona/about-us.html" th:text = "#{label.bar.aboutUs}"></a></li>
+                                <li><a href="./pages.html" th:text = "#{label.bar.pages}">Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="../../../../../../../OneDrive/Рабочий%20стол/sona/room-details.html">Room Details</a></li>
                                         <li><a href="../../../../../../../OneDrive/Рабочий%20стол/sona/blog-details.html">Blog Details</a></li>
@@ -150,8 +154,8 @@
                                         <li><a href="#">Premium Room</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="../../../../../../../OneDrive/Рабочий%20стол/sona/blog.html">News</a></li>
-                                <li><a href="../../../../../../../OneDrive/Рабочий%20стол/sona/contact.html">Contact</a></li>
+                                <li><a href="../../../../../../../OneDrive/Рабочий%20стол/sona/blog.html" th:text = "#{label.bar.news}"></a></li>
+                                <li><a href="../../../../../../../OneDrive/Рабочий%20стол/sona/contact.html" th:text = "#{label.bar.contact}"></a></li>
                             </ul>
                         </nav>
                         <div class="nav-right search-switch">
