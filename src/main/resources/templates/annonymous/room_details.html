@@ -153,12 +153,12 @@
                         <form action="/addBooking" method="post">
                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input" id="date-in" name="date_in" th:value="${date_in}">
+                                <input type="text"  id="date-in" name="date_in" th:value="${date_in}" readonly>
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
                                 <label for="date-out">Check Out:</label>
-                                <input type="text" class="date-input" id="date-out" name="date_out" th:value="${date_out}">
+                                <input type="text"  id="date-out" name="date_out" th:value="${date_out}" readonly>
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">

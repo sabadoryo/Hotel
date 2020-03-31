@@ -1,71 +1,63 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <title>Администратирование отеля</title>
     <meta charset="UTF-8">
-    <title>List of Rooms</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/util.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
-<div class="row">
-    <div class="col-sm-12">
-        <table cellpadding="20" class="table table-stripped">
-            <thead>
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Number
-                </th>
-                <th>
-                    Size
-                </th>
-                <th>
-                    Capacity
-                </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Is Empty
-                </th>
-                <th>
-                    Is Reserved
-                </th>
-                <th>
-                    Services
-                </th>
-                <th>
-                    Cost
-                </th>
-                <th>
-                    Details
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each = "rooms : ${list_of_rooms}">
-                <td th:text = "${rooms.id}"></td>
-                <td th:text = "${rooms.number}"></td>
-                <td th:text = "${rooms.size}"></td>
-                <td th:text = "${rooms.capacity}"></td>
-                <td th:text = "${rooms.description}"></td>
-                <td th:text = "${rooms.isEmpty}"></td>
-                <td th:text = "${rooms.isReserved}"></td>
-                <td th:text = "${rooms.bedInfo}"></td>
-                <td th:text = "${rooms.services}"></td>
-                <td th:text = "${rooms.cost}"></td>
-                <td>
-                    <a th:href = "@{'/editRoom/'+${rooms.id}}">EDIT</a>
-                </td>
-                <td>
-                    <a th:href = "@{'/deleteRoom/'+${rooms.id}}">DELETE</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100 ver3 m-b-110">
+                <table data-vertable="ver3">
+                    <thead>
+                    <tr class="row100 head">
+                        <th class="column100 column1" data-column="column1">Номер комнаты</th>
+                        <th class="column100 column2" data-column="column2">Количество комнат</th>
+                        <th class="column100 column3" data-column="column3">Вместимость</th>
+                        <th class="column100 column4" data-column="column4">Описание</th>
+                        <th class="column100 column5" data-column="column5">Свободен</th>
+                        <th class="column100 column6" data-column="column6">Резервы</th>
+                        <th class="column100 column7" data-column="column7">Сервисы</th>
+                        <th class="column100 column8" data-column="column8">Стоймость</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="row100" th:each = "rooms : ${list_of_rooms}">
+                        <td class="column100 column1" data-column="column1"><a th:href = "@{'/editRoom/'+${rooms.id}}" th:text = "${rooms.number}"></a></td>
+                        <td class="column100 column2" data-column="column2" th:text = "${rooms.size}"></td>
+                        <td class="column100 column3" data-column="column3" th:text = "${rooms.capacity}"></td>
+                        <td class="column100 column4" data-column="column4" th:text = "${rooms.description}"></td>
+                        <td class="column100 column5" data-column="column5" th:text = "${rooms.isEmpty}"></td>
+                        <td class="column100 column6" data-column="column6"><a th:href = "@{'/admin/profile/list_of_rooms/' + ${rooms.id} + '/bookings_page'}">Посмотреть</a></td>
+                        <td class="column100 column7" data-column="column7" th:text = "${rooms.services}"></td>
+                        <td class="column100 column8" data-column="column8" th:text = "${rooms.cost} + '$'"></td>
+<!--                        <td class="column100 column9" data-column="column9">-->
+<!--                            <a th:href = "@{'/editRoom/'+${rooms.id}}" th:text = "${rooms.number}"></a>-->
+<!--                        </td>-->
+<!--                        <td clas    s="column100 column10" data-column="column10">-->
+<!--                            <a th:href = "@{'/deleteRoom/'+${rooms.id}}">DELETE</a>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
+
+
+<script type="text/javascript" src="/static/js/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script  type="text/javascript" src="/static/js/main_table.js" th:src="@{/js/main_table.js}"></script>
+
 </body>
 </html>

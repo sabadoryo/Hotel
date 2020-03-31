@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 
 
@@ -48,4 +50,20 @@ public class Rooms extends BaseEntity {
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Bookings> bookings;
 
+    public boolean isEmptyCheck(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        Date d = new Date();
+
+        boolean ch = true;
+        if(this.getBookings() != null) {
+            for (Bookings b : this.getBookings()) {
+                System.out.println("BOOKINGS" + b);
+                if (d.after(b.getStartDate()) && d.before(b.getEndDate())) {
+                    ch = false;
+                    break;
+                }
+            }
+        }
+        return ch;
+    }
 }

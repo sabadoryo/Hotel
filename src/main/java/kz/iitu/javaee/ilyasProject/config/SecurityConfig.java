@@ -4,6 +4,7 @@ import kz.iitu.javaee.ilyasProject.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 @Configuration
 @EnableWebSecurity
@@ -30,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder builder) throws Exception{
         builder.userDetailsService(userService);
+
     }
 
     @Override
@@ -38,7 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().
                 antMatchers("/css/**").permitAll().
                 antMatchers("/js/**").permitAll().
-                antMatchers("/").permitAll();
+                antMatchers("/").permitAll().
+                and().
+                exceptionHandling().
+                authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
 
         http.formLogin()
                 .usernameParameter("user_email")
@@ -46,14 +52,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login").permitAll()
                 .loginProcessingUrl("/auth").permitAll()
                 .failureUrl("/login?error").permitAll()
-                .defaultSuccessUrl("/profile");
+                .defaultSuccessUrl("/admin/profile");
 
         http.logout()
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/admin")
                 .logoutUrl("/signout");
 
         http.csrf().disable();
 
     }
+
 
 }
