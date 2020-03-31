@@ -6,6 +6,7 @@ import kz.iitu.javaee.ilyasProject.services.EmailService;
 import kz.iitu.javaee.ilyasProject.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -54,7 +55,7 @@ public class MainController {
 
     @GetMapping(path = "/")
     public String index(Model model) throws MessagingException {
-
+        List<Rooms> rooms = roomsRepository.findAll();
         model.addAttribute("classActiveSettingsIndexPage", "active");
         return "annonymous/index";
     }
@@ -78,9 +79,26 @@ public class MainController {
         return "annonymous/rooms_category";
     }
 
-    @GetMapping(path = "/profile")
+    @GetMapping(path = "/admin/profile")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String profile(Model model) {
         return "admin/profile";
+    }
+
+    @GetMapping(path = "/admin/profile/list_of_rooms")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public String list_of_rooms(Model model) {
+
+        List<Rooms> rooms = roomsRepository.findAll();
+        for (Rooms r : rooms) {
+            r.setIsEmpty(r.isEmptyCheck());
+            roomsRepository.save(r);
+        }
+        List<Rooms> rooms1 = roomsRepository.findAll();
+
+        model.addAttribute("list_of_rooms", rooms1);
+
+        return "admin/list_of_rooms";
     }
 
     @GetMapping(path = "/registration")
@@ -104,7 +122,7 @@ public class MainController {
     }
 
     @GetMapping(value = "/add_room_page")
-    public String addRoomPage(){
+    public String addRoomPage() {
         return "admin/add_room_page";
     }
 
@@ -117,7 +135,7 @@ public class MainController {
                           @RequestParam(name = "bed_info") String bed_info,
                           @RequestParam(name = "services") String services,
                           @RequestParam(name = "cost") Double cost
-                          ){
+    ) {
         Rooms room = new Rooms(number, size, capacity, type_of_the_room,
                 false, false, "img/room/" + image, bed_info, services, cost, null);
         roomsRepository.save(room);
@@ -125,20 +143,11 @@ public class MainController {
         return "admin/profile";
     }
 
-    @GetMapping(path = "/list_of_rooms")
-    public String list_of_rooms(Model model){
-
-        List<Rooms> rooms = roomsRepository.findAll();
-        model.addAttribute("list_of_rooms", rooms);
-
-        return "admin/list_of_rooms";
-    }
-
     @GetMapping(path = "/deleteRoom/{id}")
-    public String deleteRoom(@PathVariable(name = "id") Long id){
+    public String deleteRoom(@PathVariable(name = "id") Long id) {
         List<Rooms> items = roomsRepository.findAll();
-        for(Rooms i: items){
-            if(i.getId().equals(id)){
+        for (Rooms i : items) {
+            if (i.getId().equals(id)) {
                 roomsRepository.deleteById(i.getId());
             }
         }
@@ -146,7 +155,7 @@ public class MainController {
     }
 
     @GetMapping(path = "/editRoom/{id}")
-    public String editRoom(Model model, @PathVariable(name = "id") Long id){
+    public String editRoom(Model model, @PathVariable(name = "id") Long id) {
         Rooms room_edit = roomsRepository.findById(id).orElse(null);
         model.addAttribute("room_edit", room_edit);
         return "admin/editRoom";
@@ -162,7 +171,7 @@ public class MainController {
             @RequestParam(name = "bed_info") String bed_info,
             @RequestParam(name = "services") String services,
             @RequestParam(name = "cost") Double cost,
-            @RequestParam(name = "image") String image){
+            @RequestParam(name = "image") String image) {
 
         Rooms rooms = roomsRepository.findById(id).orElse(null);
         rooms.setDescription(description);
@@ -253,24 +262,22 @@ public class MainController {
 
         Rooms room = roomsRepository.findById(id).orElse(null);
         model.addAttribute("room", room);
-        model.addAttribute("date_in",date_in);
-        model.addAttribute("date_out",date_out);
+        model.addAttribute("date_in", date_in);
+        model.addAttribute("date_out", date_out);
         return "annonymous/room_details";
     }
 
     @PostMapping(path = "/addBooking")
     public String addBooking(@RequestParam(name = "room_id") Long id,
                              @RequestParam(name = "date_in") String date_in,
-                             @RequestParam(name = "date_out")String date_out,
-                             @RequestParam(name = "customer_email")String email,
-                             @RequestParam(name = "customer_fullName")String full_name,
-                             @RequestParam(name = "customer_iin")Long iin) throws ParseException {
+                             @RequestParam(name = "date_out") String date_out,
+                             @RequestParam(name = "customer_email") String email,
+                             @RequestParam(name = "customer_fullName") String full_name,
+                             @RequestParam(name = "customer_iin") Long iin) throws ParseException {
 
-        roomService.addBookingToRoom(id,date_in,date_out,email,full_name,iin);
+        roomService.addBookingToRoom(id, date_in, date_out, email, full_name, iin);
         return "redirect:/";
     }
-
-
 
 
 }
