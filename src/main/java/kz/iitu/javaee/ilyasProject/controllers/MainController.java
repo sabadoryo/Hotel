@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.mail.MessagingException;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -51,6 +52,9 @@ public class MainController {
 
     @Autowired
     private BookingsRepository bookingsRepository;
+
+    @Autowired
+    private CommentsRepository commentsRepository;
 
 
     @GetMapping(path = "/")
@@ -219,7 +223,16 @@ public class MainController {
     public String detailsCategory(ModelMap model, @PathVariable(name = "id") Long id) {
 
         Category category = categoryRepository.findById(id).orElse(null);
+        List<Comments> comments = commentsRepository.findAll();
+        List<Comments> category_com = new ArrayList<>();
 
+        for(Comments c: comments){
+            if(c.getCategory().getId().equals(id)){
+                category_com.add(c);
+            }
+        }
+
+        model.addAttribute("category_com", category_com);
         model.addAttribute("category", category);
         return "annonymous/category_details";
     }
@@ -277,6 +290,23 @@ public class MainController {
 
         roomService.addBookingToRoom(id, date_in, date_out, email, full_name, iin);
         return "redirect:/";
+    }
+
+    @PostMapping(path = "/addComment")
+    public String addComment(@RequestParam(name = "category_id") Long id,
+                             @RequestParam(name = "name_person") String name,
+                             @RequestParam(name = "email_person") String email,
+                             @RequestParam(name = "review") String review){
+
+        Category category = categoryRepository.findById(id).orElse(null);
+
+        DateFormat dateFormat = new SimpleDateFormat("dd MM yyyy");
+        Date date = new Date();
+
+        Comments comments = new Comments(category, name, email, review, date);
+        commentsRepository.save(comments);
+
+        return "redirect:/details/category/" + id;
     }
 
 
