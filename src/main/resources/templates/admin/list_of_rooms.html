@@ -37,7 +37,7 @@
                         <td class="column100 column3" data-column="column3" th:text = "${rooms.capacity}"></td>
                         <td class="column100 column4" data-column="column4" th:text = "${rooms.description}"></td>
                         <td class="column100 column5" data-column="column5" th:text = "${rooms.isEmpty}"></td>
-                        <td class="column100 column6" data-column="column6"><a th:href = "@{'/admin/profile/list_of_rooms/' + ${rooms.id} + '/bookings_page'}">Посмотреть</a></td>
+                        <td class="column100 column6" data-column="column6"><a th:href = "@{'/admin/profile/list_of_rooms/' + ${rooms.id} + '/bookings_calendar'}">Посмотреть</a></td>
                         <td class="column100 column7" data-column="column7" th:text = "${rooms.services}"></td>
                         <td class="column100 column8" data-column="column8" th:text = "${rooms.cost} + '$'"></td>
                         <td class="column100 column9" data-column="column9"><a th:href = "@{'/editRoom/'+${rooms.id}}">Изменить</a></td>

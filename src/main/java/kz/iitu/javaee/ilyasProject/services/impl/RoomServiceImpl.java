@@ -1,13 +1,7 @@
 package kz.iitu.javaee.ilyasProject.services.impl;
 
-import kz.iitu.javaee.ilyasProject.entities.Bookings;
-import kz.iitu.javaee.ilyasProject.entities.Category;
-import kz.iitu.javaee.ilyasProject.entities.Customers;
-import kz.iitu.javaee.ilyasProject.entities.Rooms;
-import kz.iitu.javaee.ilyasProject.repositories.BookingsRepository;
-import kz.iitu.javaee.ilyasProject.repositories.CategoriesRepository;
-import kz.iitu.javaee.ilyasProject.repositories.CustomersRepository;
-import kz.iitu.javaee.ilyasProject.repositories.RoomsRepository;
+import kz.iitu.javaee.ilyasProject.entities.*;
+import kz.iitu.javaee.ilyasProject.repositories.*;
 import kz.iitu.javaee.ilyasProject.services.EmailService;
 import kz.iitu.javaee.ilyasProject.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 @Service
@@ -32,6 +28,12 @@ public class RoomServiceImpl implements RoomService {
 
     @Autowired
     CustomersRepository customersRepository;
+
+    @Autowired
+    ResourceRepository rr;
+
+    @Autowired
+    EventRepository er;
 
     @Autowired
     EmailService emailService;
@@ -134,6 +136,20 @@ public class RoomServiceImpl implements RoomService {
         room.getBookings().add(booking);
         room.setUpdatedAt(new Date());
         roomsRepository.save(room);
+
+        Event e = new Event();
+        LocalDateTime ldt = LocalDateTime.ofInstant(date_in1.toInstant(), ZoneId.systemDefault());
+        LocalDateTime ldt1 = LocalDateTime.ofInstant(date_out1.toInstant(), ZoneId.systemDefault());
+        Resource r = rr.findById(1L).orElse(null);
+
+        e.setStart(ldt);
+        e.setEnd(ldt1);
+        e.setText("Booking by:" + booking.getDescription());
+        e.setResource(r);
+        e.setRooms(room);
+        er.save(e);
+
+
 
         emailService.sendSimpleMessage(email,"Your booking was created.",
                 "Thank you for choosing our hotel\n " +
