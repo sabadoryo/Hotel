@@ -75,6 +75,7 @@ public class MainController {
         return "admin/login";
     }
 
+
     @GetMapping(path = "/rooms")
     public String rooms(Model model) {
         List<Category> categories = categoryRepository.findAll();
@@ -103,6 +104,16 @@ public class MainController {
         model.addAttribute("list_of_rooms", rooms1);
 
         return "admin/list_of_rooms";
+    }
+    @GetMapping(path = "/admin/profile/list_of_rooms/{id}/bookings_calendar")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public String bookingsCalendar(Model model,@PathVariable(name = "id") Long id)
+    {
+        Rooms room = roomsRepository.findById(id).orElse(null);
+
+        model.addAttribute("room", room);
+        model.addAttribute("rooms_id",id);
+        return "admin/bookings_calendar";
     }
 
     @GetMapping(path = "/registration")
