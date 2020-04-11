@@ -92,7 +92,31 @@
                 <h1 class="card-text">V razrabotke</h1>
             </div>
         </div>
+        <br><br>
 
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Description</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Title</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each = "book: ${bookings}">
+                <td th:text = "${book.id}"></td>
+                <td th:text = "${book.description}"></td>
+                <td th:text = "${book.startDate}"></td>
+                <td th:text = "${book.endDate}"></td>
+                <td th:text = "${book.title}"></td>
+                <td><a th:href = "@{'/deleteBooking/'+${book.id}}">Delete</a></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
 
 
 

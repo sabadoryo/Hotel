@@ -56,6 +56,9 @@ public class MainController {
     @Autowired
     private CommentsRepository commentsRepository;
 
+    @Autowired
+    private EventRepository eventRepository;
+
 
     @GetMapping(path = "/")
     public String index(Model model) throws MessagingException {
@@ -85,7 +88,7 @@ public class MainController {
     }
 
     @GetMapping(path = "/admin/profile")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public String profile(Model model) {
 
         List<Rooms> rooms = roomsRepository.findAll();
@@ -126,6 +129,9 @@ public class MainController {
         model.addAttribute("customers_count", customers.size());
         model.addAttribute("active_bookings_count", active_bookings_count);
 
+        List<Bookings> bookings = bookingsRepository.findAll();
+
+        model.addAttribute("bookings", bookings);
         return "admin/profile";
     }
 
@@ -206,6 +212,28 @@ public class MainController {
             }
         }
         return "redirect:/list_of_rooms";
+    }
+
+    @GetMapping(path = "/deleteBooking/{id}")
+    public String deleteBooking(@PathVariable(name = "id") Long id){
+        List<Bookings> bookings = bookingsRepository.findAll();
+        List<Event> events = (List<Event>) eventRepository.findAll();
+        String tmp = "";
+        for(Bookings b: bookings) {
+            if(b.getId().equals(id)) {
+                tmp = b.getTitle();
+                bookingsRepository.deleteById(b.getId());
+            }
+        }
+        String last2 = "";
+        last2 = tmp.substring(tmp.length() - 2);
+        long room_id = Long.parseLong(last2);
+        for(Event e: events){
+            if(e.getRooms().getId().equals(room_id)) {
+                eventRepository.deleteById(e.getId());
+            }
+        }
+        return "redirect:/admin/profile";
     }
 
     @GetMapping(path = "/editRoom/{id}")
