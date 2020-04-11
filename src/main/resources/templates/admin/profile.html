@@ -3,14 +3,98 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorator="main/main.html">
     <div layout:fragment="content">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 22.7rem; display: inline-block;">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <h5 class="card-title">Количество всех комнат</h5>
+                <h6 class="card-subtitle mb-2 text-muted">на данный момент составляет:</h6>
+                <h1 class="card-text" th:text = "${rooms_count}"></h1>
+<!--                <a href="#" class="card-link">Card link</a>-->
+<!--                <a href="#" class="card-link">Another link</a>-->
             </div>
         </div>
+        <div class="card" style="width: 22.7rem; display: inline-block;">
+            <div class="card-body">
+                <h5 class="card-title">Количесто комнат GOLD</h5>
+                <h6 class="card-subtitle mb-2 text-muted">на данный момент составляет:</h6>
+                <h1 class="card-text" th:text = "${gold_rooms_count}"></h1>
+            </div>
+        </div>
+
+        <div class="card" style="width: 22.7rem; display: inline-block;" >
+            <div class="card-body">
+                <h5 class="card-title">Количесто комнат Silver</h5>
+                <h6 class="card-subtitle mb-2 text-muted">на данный момент составляет:</h6>
+                <h1 class="card-text" th:text = "${silver_rooms_count}"></h1>
+            </div>
+        </div>
+
+        <div class="card" style="width: 22.7rem;display: inline-block;">
+            <div class="card-body">
+                <h5 class="card-title">Количесто комнат Bronze</h5>
+                <h6 class="card-subtitle mb-2 text-muted">на данный момент составляет:</h6>
+                <h1 class="card-text" th:text = "${bronze_rooms_count}"></h1>
+            </div>
+        </div>
+
+        <div class="card" style="width: 22.7rem;display: inline-block;">
+            <div class="card-body">
+                <h5 class="card-title">Количесто свободных комнат</h5>
+                <h6 class="card-subtitle mb-2 text-muted">на данный момент составляет:</h6>
+                <h1 class="card-text" th:text = "${not_empty_rooms_count}"></h1>
+            </div>
+        </div>
+
+        <div class="card" style="width: 22.7rem;display: inline-block;">
+            <div class="card-body">
+                <h5 class="card-title">Количесто занятых комнат</h5>
+                <h6 class="card-subtitle mb-2 text-muted">на данный момент составляет:</h6>
+                <h1 class="card-text" th:text = "${empty_rooms_count}"></h1>
+            </div>
+        </div>
+
+        <div class="card" style="width: 22.7rem;display: inline-block;">
+            <div class="card-body">
+                <h5 class="card-title">Количесто бронирований за все время</h5>
+                <h6 class="card-subtitle mb-2 text-muted">на данный момент составляет:</h6>
+                <h1 class="card-text" th:text = "${bookings_count}"></h1>
+            </div>
+        </div>
+
+
+        <div class="card" style="width: 22.7rem;display: inline-block;">
+            <div class="card-body">
+                <h5 class="card-title">Количество активных бронирований</h5>
+                <h6 class="card-subtitle mb-2 text-muted">на данный момент составляет:</h6>
+                <h1 class="card-text" th:text = "${active_bookings_count}"></h1>
+            </div>
+        </div>
+
+        <div class="card" style="width: 22.7rem;display: inline-block;">
+            <div class="card-body">
+                <h5 class="card-title">Количество обслуженных гостей</h5>
+                <h6 class="card-subtitle mb-2 text-muted">на данный момент составляет:</h6>
+                <h1 class="card-text" th:text = "${customers_count}"></h1>
+            </div>
+        </div>
+
+        <div class="card" style="width: 22.7rem;display: inline-block;">
+            <div class="card-body">
+                <h5 class="card-title">Работник месяца:</h5>
+                <h6 class="card-subtitle mb-2 text-muted">на данный момент</h6>
+                <h1 class="card-text">Yernar Abilbay</h1>
+            </div>
+        </div>
+
+        <div class="card" style="width: 22.7rem;display: inline-block;">
+            <div class="card-body">
+                <h5 class="card-title">Самый часто посещаемый гость отеля</h5>
+                <h6 class="card-subtitle mb-2 text-muted">на данный момент</h6>
+                <h1 class="card-text">V razrabotke</h1>
+            </div>
+        </div>
+
+
+
+
     </div>
 </html>
