@@ -87,6 +87,45 @@ public class MainController {
     @GetMapping(path = "/admin/profile")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String profile(Model model) {
+
+        List<Rooms> rooms = roomsRepository.findAll();
+        List<Customers> customers = customersRepository.findAll();
+
+        Category gold = categoryRepository.findById(1L).orElse(null);
+        Category silver = categoryRepository.findById(2L).orElse(null);
+        Category bronze = categoryRepository.findById(3L).orElse(null);
+
+
+        int bookings_count = 0;
+        int empty_rooms_count = 0;
+        int active_bookings_count = 0;
+
+
+        for(Rooms r: rooms){
+            if(rooms.isEmpty()){
+                empty_rooms_count++;
+            }
+            for(Bookings b: r.getBookings()){
+                if(b.getEndDate().before(new Date())){
+                    active_bookings_count++;
+                }
+                bookings_count++;
+            }
+
+        }
+        int not_empty_rooms_count = rooms.size() - empty_rooms_count;
+
+        model.addAttribute("rooms_count", rooms.size());
+        model.addAttribute("bookings_count", bookings_count);
+        model.addAttribute("empty_rooms_count",empty_rooms_count);
+        model.addAttribute("not_empty_rooms_count", not_empty_rooms_count);
+        model.addAttribute("gold_rooms_count",gold.getRooms().size());
+        model.addAttribute("silver_rooms_count", silver.getRooms().size());
+        model.addAttribute("bronze_rooms_count", bronze.getRooms().size());
+        model.addAttribute("active_bookings_count", bronze.getRooms().size());
+        model.addAttribute("customers_count", customers.size());
+        model.addAttribute("active_bookings_count", active_bookings_count);
+
         return "admin/profile";
     }
 
