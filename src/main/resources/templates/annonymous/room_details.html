@@ -14,7 +14,7 @@
                     <div class="breadcrumb-text">
                         <div class="bt-option">
                             <a href="/">Home</a>
-                                <a href="rooms">Rooms</a>
+                            <a href="rooms">Rooms</a>
                         </div>
                     </div>
                 </div>
@@ -43,12 +43,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <h2 th:text = "${room.cost} + '$/pernight'"></h2>
+                            <h2 th:text="${room.cost} + '$/pernight'"></h2>
                             <table>
                                 <tbody>
                                 <tr>
                                     <td class="r-o">Size:</td>
-                                    <td th:text = "${room.size} + 'rommed'"></td>
+                                    <td th:text="${room.size} + 'rommed'"></td>
                                 </tr>
                                 <tr>
                                     <td class="r-o">Capacity:</td>
@@ -60,7 +60,7 @@
                                 </tr>
                                 <tr>
                                     <td class="r-o">Services:</td>
-                                    <td th:text = "${room.services}"></td>
+                                    <td th:text="${room.services}"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -153,24 +153,24 @@
                         <form action="/addBooking" method="post">
                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
-                                <input type="text"  id="date-in" name="date_in" th:value="${date_in}" readonly>
+                                <input type="text" id="date-in" name="date_in" th:value="${date_in}" readonly>
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
                                 <label for="date-out">Check Out:</label>
-                                <input type="text"  id="date-out" name="date_out" th:value="${date_out}" readonly>
+                                <input type="text" id="date-out" name="date_out" th:value="${date_out}" readonly>
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
-                                <input type="text"  name="customer_email" placeholder="Enter your email">
+                                <input type="text" name="customer_email" placeholder="Enter your email">
                             </div>
 
                             <div class="check-date">
-                                <input type="text"  name="customer_fullName" placeholder="Enter your full name">
+                                <input type="text" name="customer_fullName" placeholder="Enter your full name">
                             </div>
 
                             <div class="check-date">
-                                <input type="text"  name="customer_iin" placeholder="Enter your IIN">
+                                <input type="text" name="customer_iin" placeholder="Enter your IIN">
                             </div>
                             <input type="hidden" name="room_id" th:value="${room.id}">
                             <button type="submit">Book now</button>

@@ -87,6 +87,21 @@ public class MainController {
         return "annonymous/rooms_category";
     }
 
+    @GetMapping(path ="/about-us")
+    public String about_us(Model model) {
+        return "annonymous/about-us";
+    }
+
+    @GetMapping(path ="/blog")
+    public String blog(Model model) {
+        return "annonymous/blog";
+    }
+
+    @GetMapping(path ="/contact")
+    public String contact(Model model) {
+        return "annonymous/contact";
+    }
+
     @GetMapping(path = "/admin/profile")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public String profile(Model model) {

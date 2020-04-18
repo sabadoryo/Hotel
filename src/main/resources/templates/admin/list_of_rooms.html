@@ -30,24 +30,27 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="row100" th:each = "rooms : ${list_of_rooms}">
-<!--                        <td class="column100 column1" data-column="column1"><a th:href = "@{'/editRoom/'+${rooms.id}}" th:text = "${rooms.number}"></a></td>-->
-                        <td class="column100 column1" data-column="column1" th:text = "${rooms.number}"></td>
-                        <td class="column100 column2" data-column="column2" th:text = "${rooms.size}"></td>
-                        <td class="column100 column3" data-column="column3" th:text = "${rooms.capacity}"></td>
-                        <td class="column100 column4" data-column="column4" th:text = "${rooms.description}"></td>
-                        <td class="column100 column5" data-column="column5" th:text = "${rooms.isEmpty}"></td>
-                        <td class="column100 column6" data-column="column6"><a th:href = "@{'/admin/profile/list_of_rooms/' + ${rooms.id} + '/bookings_calendar'}">Посмотреть</a></td>
-                        <td class="column100 column7" data-column="column7" th:text = "${rooms.services}"></td>
-                        <td class="column100 column8" data-column="column8" th:text = "${rooms.cost} + '$'"></td>
-                        <td class="column100 column9" data-column="column9"><a th:href = "@{'/editRoom/'+${rooms.id}}">Изменить</a></td>
-<!--                        <td class="column100 column9" data-column="column9">-->
-<!--                            <a th:href = "@{'/editRoom/'+${rooms.id}}" th:text = "${rooms.number}"></a>-->
-<!--                        </td>-->
-<!--                        <td clas    s="column100 column10" data-column="column10">-->
-<!--                            <a th:href = "@{'/deleteRoom/'+${rooms.id}}">DELETE</a>-->
-<!--                        </td>-->
-<!--                    </tr>-->
+                    <tr class="row100" th:each="rooms : ${list_of_rooms}">
+                        <!--                        <td class="column100 column1" data-column="column1"><a th:href = "@{'/editRoom/'+${rooms.id}}" th:text = "${rooms.number}"></a></td>-->
+                        <td class="column100 column1" data-column="column1" th:text="${rooms.number}"></td>
+                        <td class="column100 column2" data-column="column2" th:text="${rooms.size}"></td>
+                        <td class="column100 column3" data-column="column3" th:text="${rooms.capacity}"></td>
+                        <td class="column100 column4" data-column="column4" th:text="${rooms.description}"></td>
+                        <td class="column100 column5" data-column="column5" th:text="${rooms.isEmpty}"></td>
+                        <td class="column100 column6" data-column="column6"><a
+                                th:href="@{'/admin/profile/list_of_rooms/' + ${rooms.id} + '/bookings_calendar'}">Посмотреть</a>
+                        </td>
+                        <td class="column100 column7" data-column="column7" th:text="${rooms.services}"></td>
+                        <td class="column100 column8" data-column="column8" th:text="${rooms.cost} + '$'"></td>
+                        <td class="column100 column9" data-column="column9"><a th:href="@{'/editRoom/'+${rooms.id}}">Изменить</a>
+                        </td>
+                        <!--                        <td class="column100 column9" data-column="column9">-->
+                        <!--                            <a th:href = "@{'/editRoom/'+${rooms.id}}" th:text = "${rooms.number}"></a>-->
+                        <!--                        </td>-->
+                        <!--                        <td clas    s="column100 column10" data-column="column10">-->
+                        <!--                            <a th:href = "@{'/deleteRoom/'+${rooms.id}}">DELETE</a>-->
+                        <!--                        </td>-->
+                        <!--                    </tr>-->
                     </tbody>
                 </table>
             </div>
@@ -85,7 +88,7 @@
             if (shouldSwitch) {
                 rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
                 switching = true;
-                switchcount ++;
+                switchcount++;
             } else {
                 if (switchcount == 0 && dir == "asc") {
                     dir = "desc";
@@ -97,10 +100,8 @@
 </script>
 
 
-
-
 <script type="text/javascript" src="/static/js/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1.min.js}"></script>
-<script  type="text/javascript" src="/static/js/main_table.js" th:src="@{/js/main_table.js}"></script>
+<script type="text/javascript" src="/static/js/main_table.js" th:src="@{/js/main_table.js}"></script>
 
 </body>
 </html>
