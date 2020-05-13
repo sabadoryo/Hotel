@@ -1,6 +1,6 @@
-# javaFinal
-Java final- hotel management
-This is hotel management project, which includes booking, admin page for management and a lot more.
+# Hotel
+hotel management
+This is hotel management project, which includes booking, admin page and a lot more.
 
 # Other description 
 coming soon...
