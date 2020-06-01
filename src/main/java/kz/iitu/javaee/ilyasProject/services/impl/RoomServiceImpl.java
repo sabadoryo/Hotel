@@ -77,7 +77,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Rooms> getAvailableRoomsFromCategory(Long id,String date_In, String date_Out, int room_size, int room_capacity) throws ParseException {
+    public List<Rooms> getAvailableRoomsFromCategory(Long id, String date_In, String date_Out, int room_size, int room_capacity) throws ParseException {
         DateFormat format = new SimpleDateFormat("dd MMMM, yyyy", Locale.ENGLISH);
 
         Date date_in = format.parse(date_In);
@@ -117,18 +117,18 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public void addBookingToRoom(Long room_id, String date_in, String date_out,String email, String full_name, Long iin) throws ParseException {
+    public void addBookingToRoom(Long room_id, String date_in, String date_out, String email, String full_name, Long iin) throws ParseException {
 
         DateFormat format = new SimpleDateFormat("dd MMMM, yyyy", Locale.ENGLISH);
         Date date_in1 = format.parse(date_in);
         Date date_out1 = format.parse(date_out);
 
 
-        Bookings booking = new Bookings("This booking for room with id: " + room_id,date_in1,date_out1,"customer email:" + email + "fullname:"+ full_name);
+        Bookings booking = new Bookings("This booking for room with id: " + room_id, date_in1, date_out1, "customer email:" + email + "fullname:" + full_name);
         booking.setCreatedAt(new Date());
         bookingsRepository.save(booking);
 
-        Customers customer = new Customers(email,full_name,iin);
+        Customers customer = new Customers(email, full_name, iin);
         customer.setCreatedAt(new Date());
         customersRepository.save(customer);
 
@@ -150,14 +150,13 @@ public class RoomServiceImpl implements RoomService {
         er.save(e);
 
 
-
-        emailService.sendSimpleMessage(email,"Your booking was created.",
+        emailService.sendSimpleMessage(email, "Your booking was created.",
                 "Thank you for choosing our hotel\n " +
                         "Your booking details:" +
-                        "\nStart date: "+date_in+"" +
-                        "\nEnd date: " + date_out+"" +
-                        "\nRoom number is: "+room.getNumber() +
-                        "\nRoom description:" +room.getDescription() +"/"+room.getSize()+" sized" + "," + room.getBedInfo() +",\nServices:" +room.getServices());
+                        "\nStart date: " + date_in + "" +
+                        "\nEnd date: " + date_out + "" +
+                        "\nRoom number is: " + room.getNumber() +
+                        "\nRoom description:" + room.getDescription() + "/" + room.getSize() + " sized" + "," + room.getBedInfo() + ",\nServices:" + room.getServices());
     }
 }
 
