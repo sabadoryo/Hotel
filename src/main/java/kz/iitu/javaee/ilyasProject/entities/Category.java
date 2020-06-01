@@ -23,6 +23,9 @@ public class Category extends BaseEntity {
     @Column(name = "picture")
     private String picturePath;
 
+    @Column(name = "rating")
+    private Integer rating;
+
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Rooms> rooms;
 
