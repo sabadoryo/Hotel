@@ -10,11 +10,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h5 th:text = "${is_available_rooms}"></h5><a href="/"><span th:text = "${url_home}"></span></a>
-<!--                        <div class="bt-option">-->
-<!--                            <a href="./home.html">Home</a>-->
-<!--                            <span>Rooms</span>-->
-<!--                        </div>-->
+                        <h5 th:text="${is_available_rooms}"></h5><a href="/"><span th:text="${url_home}"></span></a>
+                        <!--                        <div class="bt-option">-->
+                        <!--                            <a href="./home.html">Home</a>-->
+                        <!--                            <span>Rooms</span>-->
+                        <!--                        </div>-->
                     </div>
                 </div>
             </div>
@@ -26,33 +26,34 @@
     <section class="rooms-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6" th:each = "room : ${empty_rooms}">
+                <div class="col-lg-4 col-md-6" th:each="room : ${empty_rooms}">
                     <div class="room-item">
                         <img th:src="${room.picturePath}" alt="">
                         <div class="ri-text">
-                            <h4 th:text = "${room.description}"></h4>
-                            <h3 th:text = "${room.cost} + '$/pernight'"></h3>
+                            <h4 th:text="${room.description}"></h4>
+                            <h3 th:text="${room.cost} + '$/pernight'"></h3>
                             <table>
                                 <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td th:text = "${room.size} + 'rommed'"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td th:text="${room.capacity} + 'persons'"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td th:text="${room.bedInfo}"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td th:text = "${room.services}"></td>
-                                    </tr>
+                                <tr>
+                                    <td class="r-o">Size:</td>
+                                    <td th:text="${room.size} + 'rommed'"></td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Capacity:</td>
+                                    <td th:text="${room.capacity} + 'persons'"></td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Bed:</td>
+                                    <td th:text="${room.bedInfo}"></td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Services:</td>
+                                    <td th:text="${room.services}"></td>
+                                </tr>
                                 </tbody>
                             </table>
-                            <a th:href = "@{'/details/room/'+${room.id} + '/' + ${date_in} + '/' + ${date_out}}" class="primary-btn">More Details</a>
+                            <a th:href="@{'/details/room/'+${room.id} + '/' + ${date_in} + '/' + ${date_out}}"
+                               class="primary-btn">More Details</a>
                         </div>
                     </div>
                 </div>
@@ -69,4 +70,4 @@
     <!-- Rooms Section End -->
 </div>
 </html>
-    <!-- Footer Section Begin -->
+<!-- Footer Section Begin -->

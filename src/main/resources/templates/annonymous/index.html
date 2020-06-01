@@ -145,19 +145,11 @@
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
-                                <li class="active"><a href="/" th:text = "#{label.bar.home}"></a></li>
-                                <li><a href="/rooms" th:text = "#{label.bar.rooms}"></a></li>
-                                <li><a href="./about-us.html" th:text = "#{label.bar.aboutUs}"></a></li>
-                                <li><a href="./pages.html" th:text = "#{label.bar.pages}"></a>
-                                    <ul class="dropdown">
-                                        <li><a href="./room-details.html">Room Details</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
-                                        <li><a href="#">Family Room</a></li>
-                                        <li><a href="#">Premium Room</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="./blog.html" th:text = "#{label.bar.news}">News</a></li>
-                                <li><a href="./contact.html" th:text = "#{label.bar.contact}">Contact</a></li>
+                                <li class="active"><a href="/" th:text="#{label.bar.home}"></a></li>
+                                <li><a href="/rooms" th:text="#{label.bar.rooms}"></a></li>
+                                <li><a href="/about-us" th:text="#{label.bar.aboutUs}"></a></li>
+                                <li><a href="/blog" th:text="#{label.bar.news}">News</a></li>
+                                <li><a href="/contact" th:text="#{label.bar.contact}">Contact</a></li>
                             </ul>
                         </nav>
                         <div class="nav-right search-switch">
@@ -206,14 +198,14 @@
                             </select>
                         </div>
                         <div class="select-option">
-                            <label for="room"th:text="#{label.main_form_size}"></label>
+                            <label for="room" th:text="#{label.main_form_size}"></label>
                             <select id="room" name="room">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
                             </select>
                         </div>
-                        <button type="submit"th:text="#{label.main_form_button}"></button>
+                        <button type="submit" th:text="#{label.main_form_button}"></button>
                     </form>
                 </div>
             </div>
@@ -235,7 +227,7 @@
                 <div class="about-text">
                     <div class="section-title">
                         <span>About Us</span>
-                        <h2>Intercontinental LA <br />Westlake Hotel</h2>
+                        <h2>Intercontinental LA <br/>Westlake Hotel</h2>
                     </div>
                     <p class="f-para">Sona.com is a leading online accommodation site. We’re passionate about
                         travel. Every day, we inspire and reach millions of travelers across 90 local websites in 41
@@ -583,7 +575,7 @@
                                 <img src="img/footer-logo.png" alt="">
                             </a>
                         </div>
-                        <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
+                        <p>We inspire and reach millions of travelers<br/> across 90 local websites</p>
                         <div class="fa-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
@@ -627,11 +619,6 @@
                         <li><a href="#">Environmental Policy</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-5">
-                    <div class="co-text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                </div>
             </div>
         </div>
     </div>
@@ -651,14 +638,16 @@
 
 <!-- Js Plugins -->
 
-<script  type="text/javascript" src="/static/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
-<script  type="text/javascript" src="/static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
-<script  type="text/javascript" src="/static/js/jquery.magnific-popup.min.js" th:src="@{/js/jquery.magnific-popup.min.js}"></script>
-<script  type="text/javascript" src="/static/js/jquery.nice-select.min.js" th:src="@{/js/jquery.nice-select.min.js}"></script>
-<script  type="text/javascript" src="/static/js/jquery-ui.min.js" th:src="@{/js/jquery-ui.min.js}"></script>
-<script  type="text/javascript" src="/static/js/jquery.slicknav.js" th:src="@{/js/jquery.slicknav.js}"></script>
-<script  type="text/javascript" src="/static/js/owl.carousel.min.js" th:src="@{/js/owl.carousel.min.js}"></script>
-<script  type="text/javascript" src="/static/js/main.js" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" src="/static/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="/static/js/jquery.magnific-popup.min.js"
+        th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+<script type="text/javascript" src="/static/js/jquery.nice-select.min.js"
+        th:src="@{/js/jquery.nice-select.min.js}"></script>
+<script type="text/javascript" src="/static/js/jquery-ui.min.js" th:src="@{/js/jquery-ui.min.js}"></script>
+<script type="text/javascript" src="/static/js/jquery.slicknav.js" th:src="@{/js/jquery.slicknav.js}"></script>
+<script type="text/javascript" src="/static/js/owl.carousel.min.js" th:src="@{/js/owl.carousel.min.js}"></script>
+<script type="text/javascript" src="/static/js/main.js" th:src="@{/js/main.js}"></script>
 
 </body>
 

@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="header">
-  <h1>Bookings calendar for room number : <span th:text = "${room.number}"></span> </h1>
+    <h1>Bookings calendar for room number : <span th:text="${room.number}"></span></h1>
 </div>
 
 <div class="main">
@@ -18,10 +18,10 @@
 
 <!-- DayPilot library -->
 <!--<script src="js/daypilot/daypilot-all.min.js"></script>-->
-<script  type="text/javascript" src="/static/js/daypilot-all.min.js" th:src="@{/js/daypilot-all.min.js}"></script>
+<script type="text/javascript" src="/static/js/daypilot-all.min.js" th:src="@{/js/daypilot-all.min.js}"></script>
 <!-- jQuery -->
 <!--<script src="js/jquery/jquery-2.2.0.min.js"></script>-->
-<script  type="text/javascript" src="/static/js/jquery-2.2.0.min.js" th:src="@{/js/jquery-2.2.0.min.js}"></script>
+<script type="text/javascript" src="/static/js/jquery-2.2.0.min.js" th:src="@{/js/jquery-2.2.0.min.js}"></script>
 
 <script>
     var dp = new DayPilot.Scheduler("dp");
@@ -77,7 +77,7 @@
             dataType: 'json'
         });
     };
-    dp.onEventClicked = function(args){
+    dp.onEventClicked = function (args) {
         alert("Info: " + args.e.text());
     };
     dp.onEventResize = function (args) {
@@ -98,10 +98,17 @@
             dataType: 'json'
         });
     };
-    dp.onBeforeEventRender = function(args) {
+    dp.onBeforeEventRender = function (args) {
         args.data.barColor = args.data.color;
         args.data.areas = [
-            { top: 6, right: 2, icon: "icon-triangle-down", visibility: "Hover", action: "ContextMenu", style: "font-size: 12px; background-color: #f9f9f9; border: 1px solid #ccc; padding: 2px 2px 0px 2px; cursor:pointer;"}
+            {
+                top: 6,
+                right: 2,
+                icon: "icon-triangle-down",
+                visibility: "Hover",
+                action: "ContextMenu",
+                style: "font-size: 12px; background-color: #f9f9f9; border: 1px solid #ccc; padding: 2px 2px 0px 2px; cursor:pointer;"
+            }
         ];
     };
     dp.contextMenu = new DayPilot.Menu({
@@ -110,25 +117,33 @@
                 text: "Blue",
                 icon: "icon icon-blue",
                 color: "#1155cc",
-                onClick: function(args) { updateColor(args.source, args.item.color); }
+                onClick: function (args) {
+                    updateColor(args.source, args.item.color);
+                }
             },
             {
                 text: "Green",
                 icon: "icon icon-green",
                 color: "#6aa84f",
-                onClick: function(args) { updateColor(args.source, args.item.color); }
+                onClick: function (args) {
+                    updateColor(args.source, args.item.color);
+                }
             },
             {
                 text: "Yellow",
                 icon: "icon icon-yellow",
                 color: "#f1c232",
-                onClick: function(args) { updateColor(args.source, args.item.color); }
+                onClick: function (args) {
+                    updateColor(args.source, args.item.color);
+                }
             },
             {
                 text: "Red",
                 icon: "icon icon-red",
                 color: "#cc0000",
-                onClick: function(args) { updateColor(args.source, args.item.color); }
+                onClick: function (args) {
+                    updateColor(args.source, args.item.color);
+                }
             },
 
         ]
