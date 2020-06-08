@@ -1,5 +1,6 @@
 package kz.iitu.javaee.ilyasProject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Category extends BaseEntity {
     private Integer rating;
 
     @OneToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Rooms> rooms;
 
 }

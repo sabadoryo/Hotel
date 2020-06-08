@@ -1,5 +1,6 @@
 package kz.iitu.javaee.ilyasProject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class Users extends BaseEntity {
     private String fullName;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Roles> roles;
 
 }

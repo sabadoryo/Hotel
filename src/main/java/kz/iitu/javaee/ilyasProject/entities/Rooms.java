@@ -1,5 +1,6 @@
 package kz.iitu.javaee.ilyasProject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,6 +49,7 @@ public class Rooms extends BaseEntity {
     private Double cost;
 
     @OneToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Bookings> bookings;
 
     public boolean isEmptyCheck(){
